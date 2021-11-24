@@ -1,0 +1,178 @@
+id_: 1111_0905
+slack_notify: True
+csv: './data/backup/data_ex7B_light.csv'
+
+# more tuned cross-valid with 'BAD' 'STP_DIFF'
+
+data:
+  # valid_list: [[train_from1, train_to_1], [train_from2, train_to_2], ...]
+  # default: valid_list = [[0, 1913]]
+  cr_val_list:
+    - 
+      - 1184
+      - 1913
+    -
+      - 1184
+      - 1885
+    -
+      - 1184
+      - 1857
+
+features:
+  - 'item_id'
+  - 'date_id'
+  - 'date'
+  - 'wm_yr_wk'
+  - 'wday'
+  - 'month'
+  - 'year'
+  - 'event_name_1'
+  - 'event_name_2'
+  - 'snap_CA'
+  - 'snap_TX'
+  - 'snap_WI'
+  - 'sell_price'
+  - 'dept_id_FOODS_1'
+  - 'dept_id_FOODS_2'
+  - 'dept_id_FOODS_3'
+  - 'dept_id_HOBBIES_1'
+  - 'dept_id_HOBBIES_2'
+  - 'dept_id_HOUSEHOLD_1'
+  - 'dept_id_HOUSEHOLD_2'
+  - 'cat_id_FOODS'
+  - 'cat_id_HOBBIES'
+  - 'cat_id_HOUSEHOLD'
+  - 'store_id_CA_1'
+  - 'store_id_CA_2'
+  - 'store_id_CA_3'
+  - 'store_id_CA_4'
+  - 'store_id_TX_1'
+  - 'store_id_TX_2'
+  - 'store_id_TX_3'
+  - 'store_id_WI_1'
+  - 'store_id_WI_2'
+  - 'store_id_WI_3'
+  - 'state_id_CA'
+  - 'state_id_TX'
+  - 'state_id_WI'
+  - 'event_type_1_Cultural'
+  - 'event_type_1_National'
+  - 'event_type_1_Religious'
+  - 'event_type_1_Sporting'
+  - '28_55_sales'
+  - 'new_item'
+  - 'pri_fluc'
+  - 'TEMP'
+  - 'MAX'
+  - 'MIN'
+  - 'STP'
+  - 'WDSP'
+  - 'PRCP'
+  - 'SNDP'
+  - 'TEMP_DIFF_1D'
+  - 'TEMP_DIFF_2D'
+  - 'FOG'
+  - 'RAIN'
+  - 'SNOW'
+  - 'THUND'
+  - 'BAD_PREV'
+  - 'corr'
+  - 'BAD'
+  - 'STP_DIFF'
+
+
+param_space:
+  learning_rate:
+    0.2
+  min_data_in_leaf:
+    - 10
+    - 60
+    - 10
+  max_depth:
+    - 7
+    - 10
+    - 1
+  bagging_fraction:
+    - 0.8
+    - 0.9
+    - 0.025
+  colsample_bytree:
+    - 0.60
+    - 0.725
+    - 0.025
+  bagging_freq:
+    - 5
+    - 10
+    - 5
+  num_leaves:
+    - 40
+    - 65
+    - 5
+  max_bin:
+    - 255
+    # default: 255 -> gpu: 63
+  lambda:
+    True
+  gpu:
+    False
+
+model:
+  num_boost_round: 100000
+  early_stopping_rounds: 50
+  verbose_eval: 100
+
+hyperopt:
+  max_evals: 50
+
+
+dtyp:
+  'item_id': 'int16'
+  'date_id': 'int16'
+  'num': 'int16'
+  'date': 'int16'
+  'wm_yr_wk': 'int16'
+  'wday': 'int8'
+  'month': 'int8'
+  'year': 'int16'
+  'event_name_1': 'int8'
+  'event_name_2': 'int8'
+  'snap_CA': 'int8'
+  'snap_TX': 'int8'
+  'snap_WI': 'int8'
+  'dept_id_FOODS_1': 'int8'
+  'dept_id_FOODS_2': 'int8'
+  'dept_id_FOODS_3': 'int8'
+  'dept_id_HOBBIES_1': 'int8'
+  'dept_id_HOBBIES_2': 'int8'
+  'dept_id_HOUSEHOLD_1': 'int8'
+  'dept_id_HOUSEHOLD_2': 'int8'
+  'cat_id_FOODS': 'int8'
+  'cat_id_HOBBIES': 'int8'
+  'cat_id_HOUSEHOLD': 'int8'
+  'store_id_CA_1': 'int8'
+  'store_id_CA_2': 'int8'
+  'store_id_CA_3': 'int8'
+  'store_id_CA_4': 'int8'
+  'store_id_TX_1': 'int8'
+  'store_id_TX_2': 'int8'
+  'store_id_TX_3': 'int8'
+  'store_id_WI_1': 'int8'
+  'store_id_WI_2': 'int8'
+  'store_id_WI_3': 'int8'
+  'state_id_CA': 'int8'
+  'state_id_TX': 'int8'
+  'state_id_WI': 'int8'
+  'event_type_1_Cultural': 'int8'
+  'event_type_1_National': 'int8'
+  'event_type_1_Religious': 'int8'
+  'event_type_1_Sporting': 'int8'
+  'event_type_1_nan': 'int8'
+  'new_item': 'int8'
+  'FOG': 'int8'
+  'RAIN': 'int8'
+  'SNOW': 'int8'
+  'HAIL': 'int8'
+  'THUND': 'int8'
+  'TORND': 'int8'
+  'BAD_PREV': 'int8'
+  'BAD': 'int8'
